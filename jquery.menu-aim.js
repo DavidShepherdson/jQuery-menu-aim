@@ -440,6 +440,10 @@
       this._clickTriggerOn();
       this.isOnHover = false;
       this.isOnClick = true;
+    },
+    
+    setSubmenuDirection: function(newDirection) {
+      this.options.submenuDirection = newDirection;
     }
   };
 
