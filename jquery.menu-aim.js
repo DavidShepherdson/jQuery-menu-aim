@@ -54,7 +54,8 @@
         activationDelay:    300,      // Delay (ms) for first submenu opening
         mouseLocsTracked:   3,        // Number of past mouse locations to track direction
         defaultDelay:       300,      // Delay (ms) when user appears to be entering submenu
-        exitDelay:          300,      // Delay (ms) for keeping menu open after user exits menu
+        exitDelay:          300,      // Delay (ms) for keeping menu open after user exits menu,
+                                      // negative to keep open indefinitely
 
         enterCallback:      $.noop,   // Function to call when mouse enters a menu row. Entering a row does not mean
                                       // the row has been activated, as the user may be mousing over to a submenu.
@@ -243,6 +244,9 @@
           that  = this;
 
       if (delay) {
+        if (delay < 0) {
+          return;
+        }
         this.timeoutId = setTimeout(function() {
           that._possiblyDeactivate(row);
         }, delay)
