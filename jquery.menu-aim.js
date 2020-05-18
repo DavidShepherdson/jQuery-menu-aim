@@ -247,8 +247,10 @@
           that._possiblyDeactivate(row);
         }, delay)
       } else {
-        this.options.deactivateCallback(row);
-        this.activeRow = null;
+        if (this.activeRow) {
+          this.options.deactivateCallback(row);
+          this.activeRow = null;
+        }
       }
     },
 
@@ -380,7 +382,7 @@
     // if the target isn't the container nor a descendant of the container
     _outsideMenuClick: function(e) {
       var obj = e.data.obj;
-      if ($(obj.el).not(e.target) && $(obj.el).has(e.target).length === 0) {
+      if ($(obj.el).not(e.target) && $(obj.el).has(e.target).length === 0 && obj.activeRow) {
         obj.options.deactivateCallback(obj.activeRow);
         obj.activeRow = null;
       }
